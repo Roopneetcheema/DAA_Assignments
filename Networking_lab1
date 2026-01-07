@@ -1,0 +1,100 @@
+Computer Networking: Concepts, Advantages, Disadvantages, and Applications
+1. Concept of Networking
+
+Networking refers to the interconnection of two or more computers or devices so they can share data, resources, and services. These connections can be made using wired (cables, fiber optics) or wireless (Wi-Fi, Bluetooth) communication.
+
+Key Networking Concepts
+
+Nodes: Devices connected to a network (computers, printers, servers).
+
+Transmission Media: The path through which data travels (cables, wireless signals).
+
+Protocols: Rules governing data communication (e.g., TCP/IP, HTTP).
+
+Network Topology: Physical or logical layout of a network (star, bus, ring, mesh).
+
+Types of Networks:
+
+LAN (Local Area Network) – small area like an office or school.
+
+MAN (Metropolitan Area Network) – covers a city.
+
+WAN (Wide Area Network) – covers large geographic areas (e.g., the Internet).
+
+2. Advantages of Networking
+
+Resource Sharing
+
+Sharing printers, storage devices, and software.
+
+Data Sharing
+
+Easy access to files and databases from different locations.
+
+Cost Efficiency
+
+Reduces hardware and software costs through sharing.
+
+Improved Communication
+
+Email, instant messaging, video conferencing.
+
+Centralized Management
+
+Easier backup, security, and updates.
+
+Scalability
+
+Easy to add new devices or users.
+
+3. Disadvantages of Networking
+
+Security Risks
+
+Vulnerable to hacking, viruses, and unauthorized access.
+
+High Setup Cost
+
+Initial cost of hardware, software, and installation.
+
+Maintenance Issues
+
+Requires skilled personnel for management and troubleshooting.
+
+Dependency on Network
+
+Network failure can disrupt all connected systems.
+
+Privacy Concerns
+
+Shared data may be accessed without proper controls.
+
+4. Applications of Networking
+
+Business and Organizations
+
+File sharing, enterprise resource planning (ERP), cloud computing.
+
+Education
+
+Online classes, digital libraries, e-learning platforms.
+
+Healthcare
+
+Electronic health records, telemedicine, remote monitoring.
+
+Banking and Finance
+
+Online banking, ATM networks, secure transactions.
+
+Communication
+
+Social media, email, VoIP, video conferencing.
+
+Entertainment
+
+Online gaming, streaming services (movies, music).
+
+Government and Public Services
+
+E-governance, online public services, data management.
