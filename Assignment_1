@@ -1,0 +1,241 @@
+1. Consider an array arr[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91} and use Binary Search to find
+the target 23.
+
+#include <iostream>
+using namespace std;
+int bin_search(int *arr,int low,int high,int target){
+    int mid;
+    while(high>=low){
+        mid=(high+low)/2;
+        if(arr[mid]==target){
+            return mid;
+        }
+        else if(arr[mid]>target){
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+        }
+    }
+    return -1;
+}
+int main() {
+    int arr[]={2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+    cout<<"The index is found at: "<<bin_search(arr,0,10,23);
+    return 0;
+}
+
+-------------------------------------------------------------------MERGE SORT--------------------------------------------------------------------------------
+2. Implement Merge sort for the given array int arr[] = {12, 11, 13, 5, 6, 7}. After implementing
+Merge Sort, apply the same implementation to sort another array: int arr2[] = {38, 27, 43,
+3, 9, 82, 10}.
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void merge(vector<int> &arr, int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    vector<int> left(n1);
+    vector<int> right(n2);
+
+   
+    for (int i = 0; i < n1; i++)
+        left[i] = arr[l + i];
+
+    for (int j = 0; j < n2; j++)
+        right[j] = arr[m + 1 + j];
+
+    int i = 0, j = 0, k = l;
+
+    
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j])
+            arr[k++] = left[i++];
+        else
+            arr[k++] = right[j++];
+    }
+
+    
+    while (i < n1)
+        arr[k++] = left[i++];
+
+    while (j < n2)
+        arr[k++] = right[j++];
+}
+
+
+void mergeSort(vector<int> &ar,int l,int r){
+    if(l<r){
+        int m=(l+r)/2;
+        mergeSort(ar,l,m);
+        mergeSort(ar,m+1,r);
+        merge(ar,l,m,r);
+    }
+}
+
+void display(vector<int> ar){
+    for(int i=0;i<ar.size();i++){
+        cout<<ar[i]<<" ";
+    }
+    cout<<endl;
+}
+
+int main() {
+    vector<int> arr = {12, 11, 13, 5, 6, 7};
+    vector<int> arr2 = {38, 27, 43, 3, 9, 82, 10};
+    display(arr);
+    mergeSort(arr,0,arr.size()-1);
+    display(arr);
+    display(arr2);
+    mergeSort(arr2,0,arr2.size()-1);
+    display(arr2);
+
+    return 0;
+}
+
+-------------------------------------------------------------------QUICK SORT--------------------------------------------------------------------------------
+
+3. Implement Quick Sort for arr[n] = { 4, 2, 6, 9, 2 }
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int partitionArray(vector<int> &A, int p, int r) {
+    int x = A[r];     
+    int i = p - 1;
+
+    for (int j = p; j <= r - 1; ++j) {
+        if (A[j] <= x) {
+            i = i + 1;
+            swap(A[i], A[j]);  
+        }
+    }
+    swap(A[i + 1], A[r]);       
+    return i + 1;
+}
+
+void quicksort(vector<int> &A, int p, int r) {
+    if (p < r) {
+        int q = partitionArray(A, p, r);
+        quicksort(A, p, q - 1);
+        quicksort(A, q + 1, r);
+    }
+}
+void display(vector<int> ar){
+    for(int i=0;i<ar.size();i++){
+        cout<<ar[i]<<" ";
+    }
+    cout<<endl;
+}
+int main() {
+    vector<int> A =  { 4, 2, 6, 9, 2 };
+    int n = A.size();
+    display(A);
+    quicksort(A, 0, n - 1);
+    display(A);
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+4. You are given a 1D array that may contain both positive and negative integers, and find
+the sum of a contiguous subarray of numbers which has the largest sum. For example, if
+the given array is {-2, -5, 6, -2, -3, 1, 5, -6}, then the maximum subarray sum is 7.
+
+class Solution {
+public:
+    // Finds maximum subarray sum crossing mid
+    int crossSum(vector<int>& nums, int l, int m, int h) {
+        int leftSum = INT_MIN;
+        int sum = 0;
+
+        // Max sum on left side (ending at m)
+        for (int i = m; i >= l; i--) {
+            sum += nums[i];
+            leftSum = max(leftSum, sum);
+        }
+
+        int rightSum = INT_MIN;
+        sum = 0;
+
+        // Max sum on right side (starting at m+1)
+        for (int i = m + 1; i <= h; i++) {
+            sum += nums[i];
+            rightSum = max(rightSum, sum);
+        }
+
+        return leftSum + rightSum;
+    }
+
+    int helper(vector<int>& nums, int l, int h) {
+        // Base case: single element
+        if (l == h) {
+            return nums[l];
+        }
+
+        int m = (l + h) / 2;
+
+        int leftMax = helper(nums, l, m);
+        int rightMax = helper(nums, m + 1, h);
+        int crossMax = crossSum(nums, l, m, h);
+
+        return max({leftMax, rightMax, crossMax});
+    }
+
+    int maxSubArray(vector<int>& nums) {
+        return helper(nums, 0, nums.size() - 1);
+    }
+};
+
+
+// class Solution {
+// public:
+//     int maxSubArray(vector<int>& nums) {
+//         int currSum = nums[0];
+//         int maxSum = nums[0];
+
+//         for (int i = 1; i < nums.size(); i++) {
+//             currSum = max(nums[i], currSum + nums[i]);
+//             maxSum = max(maxSum, currSum);
+//         }
+//         return maxSum;
+//     }
+// };
+
+
+
+// class Solution {
+// public:
+//          BRUTE-FORCE METHOD
+//     int maxSubArray(vector<int>& nums) {
+//         int maxsum=nums[0],sum=0;
+//         int size= nums.size();
+//         for(int i=0;i<size;i++){
+//             sum=nums[i];
+//             if(sum>maxsum)
+//             maxsum=sum;
+//             for(int j=i+1;j<size;j++){
+//                 sum+=nums[j];
+//                 if(sum>maxsum)
+//                 maxsum=sum;
+//             }
+//         }
+//         return maxsum;
+//     }
+// };
+
+
+=============================================================================================================================================================
+                                                                   ADDITIONAL QUESTIONS
+=============================================================================================================================================================
+
+1. You have an array A of length N. You have to divide the array into at-most M consecutive
+segments such that the maximum bitwise OR of these segments is minimum. Find the
+minimum possible maximum Bitwise OR of these segments if you divide optimally [Link].
+
