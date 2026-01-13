@@ -239,3 +239,24 @@ public:
 segments such that the maximum bitwise OR of these segments is minimum. Find the
 minimum possible maximum Bitwise OR of these segments if you divide optimally [Link].
 
+int minimizeMaxOR(vector<int>& A, int M) {
+    int low = *max_element(A.begin(), A.end());
+    int high = 0;
+    for (int x : A) high |= x;
+
+    int ans = high;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (canDivide(A, M, mid)) {
+            ans = mid;
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return ans;
+}
+-----------------------------------------------------------------------------------------------------------
+
